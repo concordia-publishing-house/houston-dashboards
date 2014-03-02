@@ -7,16 +7,17 @@ require "houston/itsm/version"
 Gem::Specification.new do |s|
   s.name        = "houston-itsm"
   s.version     = Houston::Itsm::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Houston Itsm."
-  s.description = "TODO: Description of Houston Itsm."
+  s.authors     = ["Bob Lail"]
+  s.email       = ["bob.lail@cph.org"]
+  s.homepage    = "https://github.com/concordia-publishing-house/houston-itsm"
+  s.summary     = "Module for Houston that displays ITSMs"
+  s.description = "Module for Houston that displays ITSMs"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.2.17"
+  s.add_dependency "ruby-ntlm"
 
   s.add_development_dependency "sqlite3"
 end
