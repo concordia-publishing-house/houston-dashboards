@@ -19,8 +19,6 @@
     function refresh() {
       var time = new Date(),
           hour = time.getHours();
-      // Only refresh between 6am and 6pm
-      if(hour < 6 || hour > 18) return;
       $.get('/itsm/issues').done(function(html) {
         $fires.html(html);
       });
