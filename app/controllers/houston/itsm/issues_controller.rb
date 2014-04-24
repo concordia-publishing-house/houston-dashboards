@@ -14,8 +14,7 @@ class Houston::Itsm::IssuesController < ApplicationController
       req = Net::HTTP::Get.new("/ITSM.asmx/GetOpenCallsEmergingProducts")
       req.ntlm_auth("Houston", "cph.pri", "gKfub6mFy9BHDs6")
       response = http.request(req)
-      issues = Hash.from_xml(response.body).fetch("ArrayOfOpenCallData").fetch("OpenCallData", [])
-      @issues = Array.wrap(issues).map do |issue|
+      @issues = parse_issues(response.body).map do |issue|
         url = Nokogiri::HTML::fragment(issue["CallDetailLink"]).children.first[:href]
         user = users_by_email[issue["AssignedToEmailAddress"].try(:downcase)]
         Issue.new(issue["Summary"], url, issue["AssignedToEmailAddress"], user)
@@ -23,6 +22,16 @@ class Houston::Itsm::IssuesController < ApplicationController
     end
     
     render partial: "houston/itsm/issues/fires" if request.xhr?
+  end
+  
+  def parse_issues(xml)
+    Array.wrap(
+      Hash.from_xml(response.body)
+        .fetch("ArrayOfOpenCallData", {})
+        .fetch("OpenCallData", []))
+  rescue REXML::ParseException # malformed response upstream
+    Rails.logger.error "\e[31;1m#{$!.class}\e[0;31m: #{$!.message}"
+    []
   end
   
   
