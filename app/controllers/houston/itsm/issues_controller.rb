@@ -26,7 +26,7 @@ class Houston::Itsm::IssuesController < ApplicationController
   
   def parse_issues(xml)
     Array.wrap(
-      Hash.from_xml(response.body)
+      Hash.from_xml(xml)
         .fetch("ArrayOfOpenCallData", {})
         .fetch("OpenCallData", []))
   rescue REXML::ParseException # malformed response upstream
