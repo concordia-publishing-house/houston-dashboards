@@ -1,6 +1,7 @@
 require 'ntlm/http'
 
 class Houston::Itsm::IssuesController < ApplicationController
+  layout "dashboard"
   
   def index
     users_by_email = benchmark("\e[33mEager-load users\e[0m") do
