@@ -11,7 +11,7 @@
     
     new Refresher()
       .container('#container')
-      .interval(30 * 1000) // 30 seconds
+      .interval(45 * 1000) // 45 seconds
       .callback(function() {
         $.get('/itsm/issues').done(function(html) {
           $fires.html(html);
