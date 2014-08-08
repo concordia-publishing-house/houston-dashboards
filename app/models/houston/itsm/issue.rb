@@ -5,7 +5,7 @@ module Houston
     class Issue < Struct.new(:summary, :url, :assigned_to_email, :assigned_to_user)
       
       
-      def self.all
+      def self.open
         http = Net::HTTP.start("ecphhelper", 80)
         req = Net::HTTP::Get.new("/ITSM.asmx/GetOpenCallsEmergingProducts")
         req.ntlm_auth("Houston", "cph.pri", "gKfub6mFy9BHDs6")

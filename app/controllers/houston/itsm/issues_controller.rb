@@ -3,7 +3,7 @@ class Houston::Itsm::IssuesController < ApplicationController
   
   def index
     benchmark("\e[33mFetch ITSMs\e[0m") do
-      @issues = Houston::Itsm::Issue.all
+      @issues = Houston::Itsm::Issue.open
     end
     
     benchmark("\e[33mLoad Users\e[0m") do
