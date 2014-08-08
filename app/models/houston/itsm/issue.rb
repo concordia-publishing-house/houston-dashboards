@@ -2,7 +2,7 @@ require "ntlm/http"
 
 module Houston
   module Itsm
-    class Issue < Struct.new(:summary, :url, :assigned_to_email, :assigned_to_user)
+    class Issue < Struct.new(:key, :summary, :url, :assigned_to_email, :assigned_to_user)
       
       
       def self.open
@@ -11,8 +11,11 @@ module Houston
         req.ntlm_auth("Houston", "cph.pri", "gKfub6mFy9BHDs6")
         response = http.request(req)
         parse_issues(response.body).map do |issue|
-          url = Nokogiri::HTML::fragment(issue["CallDetailLink"]).children.first[:href]
-          self.new(issue["Summary"], url, issue["AssignedToEmailAddress"].try(:downcase))
+          self.new(
+            issue["SupportCallID"],
+            issue["Summary"],
+            href_of(issue["CallDetailLink"]),
+            issue["AssignedToEmailAddress"].try(:downcase))
         end
       end
       
@@ -27,6 +30,10 @@ module Houston
       rescue REXML::ParseException # malformed response upstream
         Rails.logger.error "\e[31;1m#{$!.class}\e[0;31m: #{$!.message}"
         []
+      end
+      
+      def self.href_of(link)
+        Nokogiri::HTML::fragment(link).children.first[:href]
       end
       
     end
