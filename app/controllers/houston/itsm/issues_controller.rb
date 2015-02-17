@@ -24,7 +24,7 @@ private
       begin
         @network_error = false
         @issues = Houston::Itsm::Issue.open
-      rescue SocketError, Errno::ECONNREFUSED, Errno::ETIMEDOUT, Net::ReadTimeout
+      rescue SocketError, Errno::ECONNREFUSED, Errno::ETIMEDOUT, Net::ReadTimeout, Errno::EHOSTUNREACH
         @network_error = true
         @issues = []
       end
