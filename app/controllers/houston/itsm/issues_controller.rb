@@ -17,6 +17,14 @@ class Houston::Itsm::IssuesController < ApplicationController
     render partial: "houston/itsm/issues/fires" if request.xhr?
   end
   
+  def create
+    issue_url = Houston::Itsm::Issue.create(
+      username: current_user.username,
+      summary: params[:summary],
+      notes: params[:text])
+    render json: {url: issue_url}
+  end
+  
 private
   
   def find_issues

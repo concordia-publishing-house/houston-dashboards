@@ -1,4 +1,5 @@
 require "ntlm/http"
+require "savon"
 
 module Houston
   module Itsm
@@ -17,6 +18,23 @@ module Houston
             href_of(issue["CallDetailLink"]),
             issue["AssignedToEmailAddress"].try(:downcase))
         end
+      end
+      
+      
+      def self.create(options={})
+        username = options.fetch :username
+        summary = options.fetch :summary
+        notes = options.fetch :notes
+        
+        # http://savonrb.com/version2/client.html
+        client = Savon.client(wsdl: "http://itsmweb/WebService.asmx?wsdl")
+        response = client.call(:submit_incident, message: {userName: username, summary: summary, notes: notes})
+        unless response.body[:submit_incident_response][:submit_incident_result][:success]
+          raise response.body
+        end
+        issue_id = response.body[:submit_incident_response][:submit_incident_result][:support_call_id]
+        client.call(:assign_to_queue, message: {supportCallID: issue_id, queueName: "Emerging Products"})
+        "http://ecphhelper/Design/ViewITSMCallDetails.aspx?SupportCallID=#{issue_id}"
       end
       
       

@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails"
   s.add_dependency "ruby-ntlm"
+  s.add_dependency "savon", "~> 2.0"
 
   s.add_development_dependency "sqlite3"
 end
