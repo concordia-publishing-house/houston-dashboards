@@ -1,5 +1,5 @@
 module Houston
-  module Itsm
+  module Dashboards
     VERSION = "0.0.1"
   end
 end

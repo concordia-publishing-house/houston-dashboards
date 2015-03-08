@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  mount Itsm::Engine => "/itsm"
+  mount Dashboards::Engine => "/itsm"
 end

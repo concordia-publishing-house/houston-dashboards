@@ -1,4 +1,6 @@
-class Houston::Itsm::IssuesController < ApplicationController
+require 'itsm'
+
+class Houston::Dashboards::IssuesController < ApplicationController
   attr_reader :issues
   
   layout "dashboard"
@@ -14,15 +16,7 @@ class Houston::Itsm::IssuesController < ApplicationController
       end
     end
     
-    render partial: "houston/itsm/issues/fires" if request.xhr?
-  end
-  
-  def create
-    issue_url = Houston::Itsm::Issue.create(
-      username: current_user.username,
-      summary: params[:summary],
-      notes: params[:text])
-    render json: {url: issue_url}
+    render partial: "houston/dashboards/issues/fires" if request.xhr?
   end
   
 private
@@ -31,7 +25,7 @@ private
     benchmark("\e[33mFetch ITSMs\e[0m") do
       begin
         @network_error = false
-        @issues = Houston::Itsm::Issue.open
+        @issues = ITSM::Issue.open
       rescue SocketError, Errno::ECONNREFUSED, Errno::ETIMEDOUT, Net::ReadTimeout, Errno::EHOSTUNREACH
         @network_error = true
         @issues = []

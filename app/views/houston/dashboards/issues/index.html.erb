@@ -13,7 +13,7 @@
       .container('#container')
       .interval(45 * 1000) // 45 seconds
       .callback(function() {
-        $.get('/itsm/issues').done(function(html) {
+        $.get('/dashboards/issues').done(function(html) {
           $fires.html(html);
         });
       }).render();

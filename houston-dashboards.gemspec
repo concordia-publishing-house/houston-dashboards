@@ -1,15 +1,15 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "houston/itsm/version"
+require "houston/dashboards/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "houston-itsm"
-  s.version     = Houston::Itsm::VERSION
+  s.name        = "houston-dashboards"
+  s.version     = Houston::Dashboards::VERSION
   s.authors     = ["Bob Lail"]
   s.email       = ["bob.lail@cph.org"]
-  s.homepage    = "https://github.com/concordia-publishing-house/houston-itsm"
+  s.homepage    = "https://github.com/concordia-publishing-house/houston-dashboards"
   s.summary     = "Module for Houston that displays ITSMs"
   s.description = "Module for Houston that displays ITSMs"
 
@@ -22,3 +22,4 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "sqlite3"
 end
+ 

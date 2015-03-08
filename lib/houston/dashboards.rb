@@ -1,7 +1,7 @@
-require "houston/itsm/engine"
+require "houston/dashboards/engine"
 
 module Houston
-  module Itsm
+  module Dashboards
     extend self
     
     

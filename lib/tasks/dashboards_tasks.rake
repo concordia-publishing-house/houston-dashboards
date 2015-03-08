@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :itsm do
+# task :dashboards do
 #   # Task goes here
 # end

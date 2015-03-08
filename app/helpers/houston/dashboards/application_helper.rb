@@ -1,4 +1,4 @@
-module Houston::Itsm
+module Houston::Dashboards
   module ApplicationHelper
   end
 end

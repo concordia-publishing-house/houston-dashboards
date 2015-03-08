@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class ItsmTest < ActiveSupport::TestCase
+class DashboardsTest < ActiveSupport::TestCase
   test "truth" do
-    assert_kind_of Module, Houston::Itsm
+    assert_kind_of Module, Houston::Dashboards
   end
 end
