@@ -7,6 +7,8 @@ class Houston::Dashboards::IssuesController < ApplicationController
   before_filter :find_issues
   
   def index
+    @title ="ITSMs"
+    
     benchmark("\e[33mLoad Users\e[0m") do
       users_by_email = User.all.each_with_object({}) { |user, map|
         user.email_addresses.each { |email| map[email.downcase] = user } }
