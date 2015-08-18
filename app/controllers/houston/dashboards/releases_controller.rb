@@ -6,12 +6,16 @@ class Houston::Dashboards::ReleasesController < ApplicationController
     
     @upcoming_changes = %w{members unite ledger}.flat_map do |slug|
       project = Project.find_by_slug slug
-      branches = project.repo.branches
-      master, beta = branches.values_at "master", "beta"
-      commits = project.commits.between(master, beta)
-      release = Release.new(project: project)
-      commits.map { |commit| ReleaseChange.from_commit(release, commit) }
-        .reject { |change| change.tag.nil? }
+      master = project.repo.branch "master"
+      beta = project.repo.branch "beta"
+      if master && beta
+        release = Release.new(project: project)
+        project.commits.between(master, beta)
+          .map { |commit| ReleaseChange.from_commit(release, commit) }
+          .reject { |change| change.tag.nil? }
+      else
+        []
+      end
     end
     
     projects = Project.where(slug: %w{members unite ledger})
