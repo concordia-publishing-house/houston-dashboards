@@ -36,7 +36,7 @@ class Houston::Dashboards::ReleasesController < ApplicationController
         .reject { |change| change.tag.nil? }
     end
     
-    render partial: "houston/dashboards/issues/changes" if request.xhr?
+    render partial: "houston/dashboards/releases/changes", locals: {changes: @changes} if request.xhr?
   end
   
   def recent
@@ -46,7 +46,7 @@ class Houston::Dashboards::ReleasesController < ApplicationController
     releases = Release.where(project_id: projects.map(&:id)).limit(20)
     @changes = releases.flat_map(&:release_changes).take(15)
     
-    render partial: "houston/dashboards/issues/changes" if request.xhr?
+    render partial: "houston/dashboards/releases/changes", locals: {changes: @changes} if request.xhr?
   end
   
 end
