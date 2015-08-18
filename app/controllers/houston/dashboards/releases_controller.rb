@@ -1,10 +1,31 @@
 class Houston::Dashboards::ReleasesController < ApplicationController
   layout "houston/dashboards/dashboard"
+  helper_method :recent_changes, :upcoming_changes
   
   def index
-    @title = "Changes"
-    
-    @upcoming_changes = %w{members unite ledger}.flat_map do |slug|
+    @title = "Releases"
+  end
+  
+  def upcoming
+    @title ="Upcoming"
+    render partial: "houston/dashboards/releases/changes", locals: {changes: upcoming_changes} if request.xhr?
+  end
+  
+  def recent
+    @title ="Recent"
+    render partial: "houston/dashboards/releases/changes", locals: {changes: recent_changes} if request.xhr?
+  end
+  
+private
+  
+  def recent_changes
+    projects = Project.where(slug: %w{members unite ledger})
+    releases = Release.where(project_id: projects.map(&:id)).limit(20)
+    releases.flat_map(&:release_changes).take(15)
+  end
+  
+  def upcoming_changes
+    %w{members unite ledger}.flat_map do |slug|
       project = Project.find_by_slug slug
       master = project.repo.branch "master"
       beta = project.repo.branch "beta"
@@ -17,36 +38,6 @@ class Houston::Dashboards::ReleasesController < ApplicationController
         []
       end
     end
-    
-    projects = Project.where(slug: %w{members unite ledger})
-    releases = Release.where(project_id: projects.map(&:id)).limit(20)
-    @recent_changes = releases.flat_map(&:release_changes).take(12)
-  end
-  
-  def upcoming
-    @title ="Upcoming"
-    
-    @changes = %w{members unite ledger}.flat_map do |slug|
-      project = Project.find_by_slug slug
-      branches = project.repo.branches
-      master, beta = branches.values_at "master", "beta"
-      commits = project.commits.between(master, beta)
-      release = Release.new(project: project)
-      commits.map { |commit| ReleaseChange.from_commit(release, commit) }
-        .reject { |change| change.tag.nil? }
-    end
-    
-    render partial: "houston/dashboards/releases/changes", locals: {changes: @changes} if request.xhr?
-  end
-  
-  def recent
-    @title ="Recent"
-    
-    projects = Project.where(slug: %w{members unite ledger})
-    releases = Release.where(project_id: projects.map(&:id)).limit(20)
-    @changes = releases.flat_map(&:release_changes).take(15)
-    
-    render partial: "houston/dashboards/releases/changes", locals: {changes: @changes} if request.xhr?
   end
   
 end
