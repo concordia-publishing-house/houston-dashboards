@@ -20,7 +20,7 @@ private
   
   def recent_changes
     projects = Project.where(slug: %w{members unite ledger})
-    releases = Release.where(project_id: projects.map(&:id)).limit(20)
+    releases = Release.where(project_id: projects.map(&:id)).to("production").limit(20)
     releases.flat_map(&:release_changes).take(15)
   end
   
