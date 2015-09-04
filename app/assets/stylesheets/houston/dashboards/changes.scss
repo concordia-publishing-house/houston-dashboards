@@ -24,3 +24,31 @@
   overflow: hidden;
   color: #aaa;
 }
+
+.dashboards-divider-releases {
+  margin: 1.66em 0 2em;
+
+  label {
+    font-weight: 500;
+    color: #404040;
+    line-height: normal;
+    margin: 0.33em;
+    font-size: 11px;
+    cursor: default;
+
+    i {
+      font-size: 15px;
+      margin: 0 0.33em 0 0.66em;
+
+      &.fa-caret-up { vertical-align: text-bottom; }
+      &.fa-caret-down { vertical-align: text-top; }
+    }
+  }
+
+  hr { 
+    border: none;
+    height: 1px;
+    background: #1f1f1f;
+    margin: 0;
+  }
+}

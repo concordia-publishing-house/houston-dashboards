@@ -1,10 +1,14 @@
-<h1>Upcoming</h1>
+<h1>Releases</h1>
 
 <div id="upcoming_changes" class="-houston-changelog release-changes">
   <%= render partial: "changes", locals: {changes: upcoming_changes} %>
 </div>
 
-<h1 style="margin-top: 1em;">Recent</h1>
+<div class="dashboards-divider-releases">
+  <label><i class="fa fa-caret-up"></i> Upcoming</label>
+  <hr>
+  <label><i class="fa fa-caret-down"></i> Recent</label>
+</div>
 
 <div id="recent_changes" class="-houston-changelog release-changes">
   <%= render partial: "changes", locals: {changes: recent_changes} %>
