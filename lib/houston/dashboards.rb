@@ -1,15 +1,15 @@
 require "houston/dashboards/engine"
+require "houston/dashboards/configuration"
 
 module Houston
   module Dashboards
     extend self
-    
-    
-    # Add menu items to Houston's navigation
-    def menu_items_for(context={})
-      []
+
+    def config(&block)
+      @configuration ||= Dashboards::Configuration.new
+      @configuration.instance_eval(&block) if block_given?
+      @configuration
     end
-    
-    
+
   end
 end
