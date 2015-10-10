@@ -1,29 +1,29 @@
 class Houston::Dashboards::ReleasesController < ApplicationController
   layout "houston/dashboards/dashboard"
   helper_method :recent_changes, :upcoming_changes
-  
+
   def index
     @title = "Releases"
   end
-  
+
   def upcoming
     @title ="Upcoming"
     render partial: "houston/dashboards/releases/changes", locals: {changes: upcoming_changes} if request.xhr?
   end
-  
+
   def recent
     @title ="Recent"
     render partial: "houston/dashboards/releases/changes", locals: {changes: recent_changes} if request.xhr?
   end
-  
+
 private
-  
+
   def recent_changes
     projects = Project.where(slug: %w{members unite ledger})
     releases = Release.where(project_id: projects.map(&:id)).to("production").limit(20)
     releases.flat_map(&:release_changes).take(15)
   end
-  
+
   def upcoming_changes
     %w{members unite ledger}.flat_map do |slug|
       project = Project.find_by_slug slug
@@ -39,5 +39,5 @@ private
       end
     end
   end
-  
+
 end
