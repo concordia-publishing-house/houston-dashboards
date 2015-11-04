@@ -1,0 +1,19 @@
+<% @up_next.each do |slug, project_data| %>
+
+    <% project_data[:pull_requests].each do |pull_request| %>
+      <tr class="up-next-pr">
+        <td class="up-next-project">
+          <span class="label <%= project_data[:project].color %>">
+            <%= project_data[:project].slug %>
+          </span>
+        </td>
+        <td class="staging-pr-title">
+          <%= link_to truncate(pull_request.title, length: 100), pull_request.html_url, target: "_blank" %>
+        </td>
+        <td class="staging-user">
+          <img class="avatar" src="<%= pull_request.user.avatar_url %>;s=52" width="26" height="26" alt="<%= pull_request.user.login %>">
+        </td>
+      </tr>
+    <% end %>
+
+<% end %>
