@@ -1,0 +1,16 @@
+  <% @on_staging.each do |slug, info| %>
+    <tr class="on-staging-pr">
+      <td class="staging-pr-project">
+        <span class="label <%= info[:project].color %>">
+          <%= info[:project].slug %>
+        </span>
+      </td>
+      <td class="staging-pr-title">
+        <%= link_to truncate(info[:pull_request].title, length: 100), info[:pull_request].html_url, target: "_blank" %>
+      </td>
+      <td class="staging-user">
+        <img class="avatar" src="<%= info[:pull_request].user.avatar_url %>;s=52" width="26" height="26" alt="<%= info[:pull_request].user.login %>">
+      </td>
+    </tr>
+
+  <% end %>
