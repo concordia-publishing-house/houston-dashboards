@@ -1,5 +1,12 @@
 module Houston::Dashboards
   module StagingHelper
+
+    def checkboxes(pull_request)
+      checked = completed_checkboxes(pull_request)
+      total = total_checkboxes(pull_request)
+      "<span class='label'>#{checked}/#{total}</span>" unless total < 1
+    end
+
     def completed_checkboxes(pull_request)
       pull_request.body.scan("[x]").count
     end

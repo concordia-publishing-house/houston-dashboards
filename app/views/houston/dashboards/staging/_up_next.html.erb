@@ -11,7 +11,7 @@
           <%= link_to truncate(pull_request.title, length: 100), pull_request.html_url, target: "_blank" %>
         </td>
         <td class="checkboxes">
-          <span class="label"> <%= completed_checkboxes(pull_request) %>/<%= total_checkboxes(pull_request) %></span>
+          <%= raw(checkboxes(pull_request)) %>
         </td>
         <td class="up-next-user">
           <img class="avatar" src="<%= pull_request.user.avatar_url %>;s=52" width="26" height="26" alt="<%= pull_request.user.login %>">
