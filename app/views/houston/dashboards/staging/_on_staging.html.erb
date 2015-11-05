@@ -7,6 +7,7 @@
       </td>
       <td class="staging-pr-title">
         <%= link_to truncate(info[:pull_request].title, length: 100), info[:pull_request].html_url, target: "_blank" %>
+        <%= raw staging_status(info[:pull_request]) %>
       </td>
       <td class="checkboxes">
         <%= raw(checkboxes(info[:pull_request])) %>

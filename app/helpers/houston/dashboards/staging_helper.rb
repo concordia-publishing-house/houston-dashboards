@@ -16,5 +16,14 @@ module Houston::Dashboards
       not_completed = pull_request.body.scan("[ ]").count
       completed + not_completed
     end
+
+    def staging_status(pull_request)
+      labels = pull_request.labels.map(&:name).select { |name| ['test-needed', 'test-pass', 'test-hold'].include?(name)}
+      label_out = ""
+      labels.each do |label|
+        label_out << "<span class=\"pr-tag #{label}\">&nbsp;</span>"
+      end
+      label_out
+    end
   end
 end

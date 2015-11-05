@@ -31,6 +31,24 @@
       &.staging-user {
         width: 26px;
       }
+
+      .pr-tag {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        line-height: 1;
+        margin-left: 8px;
+        &.test-needed {
+          background-color: #f7c6c7;
+        }
+        &.test-pass {
+          background-color: #009800;
+        }
+        &.test-hold {
+          background-color: #e11d21;
+        }
+      }
     }
   }
 }
