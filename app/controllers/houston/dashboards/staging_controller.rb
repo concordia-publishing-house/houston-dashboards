@@ -41,11 +41,16 @@ private
   end
 
   def test_needed_pull_requests(project)
-    Houston.github.list_issues(
+    pull_requests = Houston.github.list_issues(
       "#{github_org}/#{project.slug}",
       labels: "test-needed",
       filter: "all")
         .select(&:pull_request)
+
+    pull_requests.reject do |pull_request|
+      labels = pull_request.labels.map(&:name)
+      labels.include?("on-staging")
+    end
   end
 
   def github_org
