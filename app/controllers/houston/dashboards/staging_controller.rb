@@ -1,6 +1,6 @@
 class Houston::Dashboards::StagingController < ApplicationController
   layout "houston/dashboards/dashboard"
-  STAGING_PROJECTS = %w(members unite ledger bsb)
+  STAGING_PROJECTS = %w(members unite ledger bsb members-dav)
   def index
     @on_staging = currently_on_staging
     @up_next = up_next
