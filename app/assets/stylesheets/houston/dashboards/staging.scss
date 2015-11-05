@@ -24,6 +24,10 @@
         width: 99%;
       }
 
+      &.checkboxes {
+        width: 40px;
+        text-align: right;
+      }
       &.staging-user {
         width: 26px;
       }
@@ -55,6 +59,11 @@
 
       &.up-next-title{
         width: 99%;
+      }
+
+      &.checkboxes {
+        width: 40px;
+        text-align: right;
       }
 
       &.up-next-user {
