@@ -4,7 +4,7 @@ module Houston::Dashboards
     def checkboxes(pull_request)
       checked = completed_checkboxes(pull_request)
       total = total_checkboxes(pull_request)
-      "<span class='label'>#{checked}/#{total}</span>" unless total < 1
+      "<span class='label'>#{checked}/#{total}</span>".html_safe unless total < 1
     end
 
     def completed_checkboxes(pull_request)
@@ -23,7 +23,7 @@ module Houston::Dashboards
       labels.each do |label|
         label_out << "<span class=\"pr-tag #{label}\">&nbsp;</span>"
       end
-      label_out
+      label_out.html_safe
     end
   end
 end
