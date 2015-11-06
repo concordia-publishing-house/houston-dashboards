@@ -25,5 +25,10 @@ module Houston::Dashboards
       end
       label_out.html_safe
     end
+
+    def pr_project_color(pull_request)
+      project = Project.find_by(slug: pull_request.repository.name)
+      project.nil? ? '' : project.color
+    end
   end
 end

@@ -1,22 +1,20 @@
-<% @up_next.each do |slug, project_data| %>
+<% @up_next.each do |pull_request| %>
 
-    <% project_data[:pull_requests].each do |pull_request| %>
-      <tr class="up-next-pr">
-        <td class="up-next-project">
-          <span class="label <%= project_data[:project].color %>">
-            <%= project_data[:project].slug %>
-          </span>
-        </td>
-        <td class="up-next-title">
-          <%= link_to truncate(pull_request.title, length: 100), pull_request.html_url, target: "_blank" %>
-        </td>
-        <td class="checkboxes">
-          <%= checkboxes(pull_request) %>
-        </td>
-        <td class="up-next-user">
-          <img class="avatar" src="<%= pull_request.user.avatar_url %>;s=52" width="26" height="26" alt="<%= pull_request.user.login %>">
-        </td>
-      </tr>
-    <% end %>
+    <tr class="up-next-pr">
+      <td class="up-next-project">
+        <span class="label <%= pr_project_color(pull_request) %>">
+          <%= pull_request.repository.name %>
+        </span>
+      </td>
+      <td class="up-next-title">
+        <%= link_to truncate(pull_request.title, length: 100), pull_request.html_url, target: "_blank" %>
+      </td>
+      <td class="checkboxes">
+        <%= checkboxes(pull_request) %>
+      </td>
+      <td class="up-next-user">
+        <img class="avatar" src="<%= pull_request.user.avatar_url %>;s=52" width="26" height="26" alt="<%= pull_request.user.login %>">
+      </td>
+    </tr>
 
 <% end %>
