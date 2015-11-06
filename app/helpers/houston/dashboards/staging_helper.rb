@@ -18,7 +18,7 @@ module Houston::Dashboards
     end
 
     def staging_status(pull_request)
-      labels = pull_request.labels.map(&:name).select { |name| ['test-needed', 'test-pass', 'test-hold'].include?(name)}
+      labels = pull_request.labels.map(&:name).select { |name| ['test-pass', 'test-hold'].include?(name)}
       label_out = ""
       labels.each do |label|
         label_out << "<span class=\"pr-tag #{label}\">&nbsp;</span>"
