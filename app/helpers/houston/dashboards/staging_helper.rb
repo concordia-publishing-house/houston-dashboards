@@ -18,7 +18,7 @@ module Houston::Dashboards
     end
 
     def staging_status(pull_request)
-      labels = pull_request.labels.map(&:name).select { |name| ['test-pass', 'test-hold'].include?(name)}
+      labels = pull_request.labels.select { |name| ['test-pass', 'test-hold'].include?(name)}
       label_out = ""
       labels.each do |label|
         label_out << "<span class=\"pr-tag #{label}\">&nbsp;</span>"
@@ -26,9 +26,5 @@ module Houston::Dashboards
       label_out.html_safe
     end
 
-    def pr_project_color(pull_request)
-      project = Project.find_by(slug: pull_request.repository.name)
-      project.nil? ? '' : project.color
-    end
   end
 end
