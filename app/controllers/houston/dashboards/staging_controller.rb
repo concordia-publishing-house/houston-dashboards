@@ -3,9 +3,7 @@ class Houston::Dashboards::StagingController < ApplicationController
 
   def index
     @on_staging = Github::PullRequest.labeled "on-staging"
-    @up_next = Github::PullRequest.labeled("test-needed").reject do |pr|
-      pr.labels.include? "on-staging" || "wip"
-    end
+    @up_next = Github::PullRequest.labeled("test-needed").without_labels("on-staging", "wip", "experimental")
 
     @title = "Staging"
     @title << " (#{@on_staging.count})" if @on_staging.count > 0
