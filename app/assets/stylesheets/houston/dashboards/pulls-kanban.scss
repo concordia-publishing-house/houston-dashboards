@@ -1,0 +1,142 @@
+#container {
+  display: flex;
+  flex-direction: column;
+}
+
+#pulls {
+  flex-grow: 100;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '.';
+    color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+  }
+}
+
+.kanban {
+  table-layout: fixed;
+  width: 100%;
+
+  &.kanban-data {
+    position: absolute;
+    bottom: 0;
+  }
+
+  td {
+    vertical-align: bottom;
+  }
+
+  tfoot th {
+    text-align: left;
+    padding: 1em 0 0 12.5px;
+    line-height: normal;
+    vertical-align: top;
+    font-weight: normal;
+    color: #909090;
+    font-size: 13px;
+
+    div { white-space: nowrap; }
+
+    .kanban-queue-count {
+      &::before { content: '('; }
+      &::after { content: ')'; }
+    }
+
+    .small {
+      display: block;
+      font-weight: normal;
+      margin: 0.75em 0.75em 0;
+      font-size: 0.66em;
+      text-align: left;
+      line-height: 1.15em;
+
+      u {
+        text-decoration: none;
+        background-color: #FFB;
+      }
+    }
+  }
+
+  td.alt, th.alt { background: #efefef; }
+
+  ol, ul {
+    margin: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+
+    // Stack from the bottom
+    -webkit-transform: scaleY(-1);
+    -moz-transform: scaleY(-1);
+    -ms-transform: scaleY(-1);
+    transform: scaleY(-1);
+  }
+
+  li {
+    position: relative;
+    list-style-type: none;
+    display: block;
+    border-style: solid;
+    border-width: 0 0 0 3.5px;
+    margin: 0.2222222em;              // * 18px =  4px
+
+    // Stack from the bottom
+    -webkit-transform:scaleY(-1);
+    -moz-transform:scaleY(-1);
+    -ms-transform:scaleY(-1);
+    transform:scaleY(-1);
+
+    line-height: normal;
+
+    a {
+      display: block;
+      padding: 0.5em 0.5em 1.5em 0.5em;
+      padding: 2px 0 0 5px;
+      text-decoration: none;
+    }
+
+    &.hover {
+      border-color: #ed8 !important;
+      background-color: #ffffcf !important;
+    }
+
+    .pull-request-title {
+      display: block;
+      font-size: 11px;
+      max-height: 25px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #909090;
+    }
+
+    .pull-request-number {
+      font-size: 13px;
+      font-weight: 200;
+      line-height: 1.5em;
+      color: #ccc;
+    }
+
+    .pull-request-avatar {
+      > img {
+        margin-left: 2px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,11 @@
+<% Houston.config.project_colors.each do |name, value| %>
+  $<%= name %>: <%= value.rgb %>;
+<% end %>
+
+.kanban-pull-request {
+  <% Houston.config.project_colors.each do |name, value| %>
+    &.<%= name %> {
+      border-color: <%= value.rgb %>;
+    }
+  <% end %>
+}
