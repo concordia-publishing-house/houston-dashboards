@@ -9,6 +9,7 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  height: 82%; // for Midori, which doesn't support display: flex
 
   &::after {
     content: '.';
