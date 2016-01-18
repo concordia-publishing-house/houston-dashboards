@@ -8,7 +8,7 @@
               <li class="kanban-pull-request <%= pull.project.color %>">
                 <%= link_to pull.url, target: "_blank" do %>
                   <span class="pull-request-title"><%= pull.title %></span>
-                  <span class="pull-request-number"><%= pull.number %></span>
+                  <b class="label <%= pull.project.color %> pull-request-number"><%= pull.number %></b>
                   <span class="pull-request-avatar">
                     <% if pull.user %>
                       <%= avatar_for pull.user, size: 24 %>

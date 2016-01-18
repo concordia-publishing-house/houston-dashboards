@@ -10,7 +10,7 @@
       <% @queues.each do |slug, pulls| %>
         <th class="kanban-column" data-queue="<%= slug %>">
           <div class="title">
-            <%= slug.to_s.titleize %>
+            <%= slug %>
             <span class="kanban-queue-count"></span>
           </div>
         </th>

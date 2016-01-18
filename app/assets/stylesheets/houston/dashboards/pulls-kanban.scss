@@ -31,6 +31,7 @@
 .kanban {
   table-layout: fixed;
   width: 100%;
+  font-weight: 200;
 
   &.kanban-data {
     position: absolute;
@@ -43,23 +44,32 @@
 
   tfoot th {
     text-align: left;
-    padding: 1em 0 0 12.5px;
+    padding: 0;
     line-height: normal;
+    font-weight: 200;
     vertical-align: top;
-    font-weight: normal;
     color: #909090;
     font-size: 13px;
 
-    div { white-space: nowrap; }
+    div {
+      white-space: nowrap;
+      margin: 0 3px;
+    }
 
     .kanban-queue-count {
-      &::before { content: '('; }
-      &::after { content: ')'; }
+      display: inline-block;
+      border-radius: 1em;
+      border: 1px solid;
+      min-width: 1.33em;
+      height: 1.33em;
+      line-height: 1.33em;
+      text-align: center;
+      border-color: #404040;
+      margin-left: 0.25em;
     }
 
     .small {
       display: block;
-      font-weight: normal;
       margin: 0.75em 0.75em 0;
       font-size: 0.66em;
       text-align: left;
@@ -85,16 +95,14 @@
     position: relative;
     list-style-type: none;
     display: block;
-    border-style: solid;
-    border-width: 0 0 0 3.5px;
-    margin: 0.2222222em;              // * 18px =  4px
+    margin: 10px 3px;
     line-height: normal;
 
     a {
       display: block;
-      padding: 0.5em 0.5em 1.5em 0.5em;
-      padding: 2px 0 0 5px;
+      padding: 0;
       text-decoration: none;
+      line-height: 1em;
     }
 
     &.hover {
@@ -104,18 +112,19 @@
 
     .pull-request-title {
       display: block;
-      font-size: 11px;
-      max-height: 25px;
+      font-size: 13px;
+      max-height: 30px;
       overflow: hidden;
       text-overflow: ellipsis;
       color: #909090;
+      margin-bottom: 1px;
     }
 
-    .pull-request-number {
-      font-size: 13px;
-      font-weight: 200;
-      line-height: 1.5em;
-      color: #ccc;
+    .label.pull-request-number {
+      padding: 1px 2px;
+      font-size: 10.844px;
+      line-height: 13px;
+      color: black;
     }
 
     .pull-request-avatar {
