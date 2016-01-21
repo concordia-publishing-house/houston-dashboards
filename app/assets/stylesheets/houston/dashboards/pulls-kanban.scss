@@ -9,7 +9,6 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  height: 82%; // for Midori, which doesn't support display: flex
 
   &::after {
     content: '.';
@@ -36,11 +35,11 @@
   &.kanban-data {
     position: absolute;
     bottom: 0;
+
+    .kanban-column { padding: 0 0 4px 0; }
   }
 
-  td {
-    vertical-align: bottom;
-  }
+  td { vertical-align: bottom; }
 
   tfoot th {
     text-align: left;
@@ -50,10 +49,11 @@
     vertical-align: top;
     color: #909090;
     font-size: 13px;
+    border-top: 1px solid #202020;
 
     div {
       white-space: nowrap;
-      margin: 0 3px;
+      margin: 12px 3px 0;
     }
 
     .kanban-queue-count {
