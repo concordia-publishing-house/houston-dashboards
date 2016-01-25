@@ -8,7 +8,7 @@
               <li class="kanban-pull-request <%= pull.project.color %>">
                 <%= link_to pull.url, target: "_blank" do %>
                   <span class="pull-request-title"><%= pull.title %></span>
-                  <b class="label <%= pull.project.color %> pull-request-number"><%= pull.number %></b>
+                  <b class="bubble <%= pull.project.color %>"><%= pull.project.slug[0].upcase %></b>
                   <span class="pull-request-avatar">
                     <% if pull.user %>
                       <%= avatar_for pull.user, size: 24 %>
@@ -16,6 +16,7 @@
                       <%= image_tag pull.avatar_url, size: "24", alt: pull.username, class: "avatar avatar-not-our-user" %>
                     <% end %>
                   </span>
+                  <span class="pull-request-number"><%= pull.number %></span>
                 <% end %>
               </li>
             <% end %>
