@@ -32,7 +32,6 @@ $bubble-size: 14px;
 .kanban {
   table-layout: fixed;
   width: 100%;
-  font-weight: 200;
 
   &.kanban-data {
     position: absolute;
@@ -70,7 +69,7 @@ $bubble-size: 14px;
       text-align: center;
       color: black;
       margin-left: 0.5em;
-      font-weight: 400;
+      font-weight: bold;
     }
 
     .small {
@@ -118,10 +117,11 @@ $bubble-size: 14px;
     .pull-request-title {
       display: block;
       font-size: 13px;
-      max-height: 30px;
+      max-height: 29px;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: #909090;
+      color: #808080;
+      margin-bottom: 1px;
     }
 
     .bubble {
@@ -142,9 +142,9 @@ $bubble-size: 14px;
 
     .pull-request-number {
       margin-left: 0.5em;
-      color: #666;
+      color: #444;
       font-size: 10.844px;
-      font-weight: 500;
+      font-weight: bold;
       vertical-align: middle;
     }
 
