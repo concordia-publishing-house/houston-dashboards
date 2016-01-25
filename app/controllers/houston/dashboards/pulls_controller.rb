@@ -3,7 +3,11 @@ class Houston::Dashboards::PullsController < ApplicationController
 
   def index
     @queues = { "WIP" => [], "Review Needed" => [], "Waiting for Staging" => [], "In-Testing" => [], "Ready to Release" => [] }
-    pulls = Github::PullRequest.without_labels("archived", "experimental").order(created_at: :asc)
+    pulls = Github::PullRequest
+      .preload(:project, :user)
+      .without_labels("archived", "experimental")
+      .order(created_at: :asc)
+
     pulls.each do |pull|
       if pull.labeled?("wip")
         @queues["WIP"].push pull
