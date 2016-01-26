@@ -7,7 +7,14 @@ class Houston::Dashboards::PullsController < ApplicationController
       .without_labels("archived", "experimental")
       .order(created_at: :asc)
 
-    @queues = { "WIP" => [], "Review Needed" => [], "Waiting for Staging" => [], "In-Testing" => [], "Ready to Release" => [] }
+    @queues = {
+      "On Hold" => [],
+      "WIP" => [],
+      "Review Needed" => [],
+      "Waiting for Staging" => [],
+      "In-Testing" => [],
+      "Ready to Release" => []
+    }
     @title = "Pull Requests (#{pulls.count})"
 
     pulls.each do |pull|
@@ -18,6 +25,11 @@ class Houston::Dashboards::PullsController < ApplicationController
 
       unless pull.labeled_any?("review-pass", "review-hold")
         @queues["Review Needed"].push pull
+      end
+
+      if pull.labeled?("hold")
+        @queues["On Hold"].push pull
+        next
       end
 
       if pull.labeled?("review-pass") && pull.labeled_any?("test-pass", "no-test")
