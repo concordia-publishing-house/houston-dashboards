@@ -2,20 +2,22 @@
 
 <div id="roadmap" class="roadmap-dashboard"></div>
 
+<hr style="margin: 48px 0 6px"/>
+
 <div id="sprint_view"></div>
 
 <% content_for :javascripts do %>
 <script type="text/javascript">
   $(function() {
-    Roadmap.milestones = new Roadmap.Milestones(<%= raw Houston::Roadmap::MilestonePresenter.new(@milestones).to_json %>, {parse: true});
+    Roadmaps.milestones = new Roadmaps.Milestones(<%= raw Houston::Roadmaps::RoadmapMilestonePresenter.new(@milestones).to_json %>, {parse: true});
 
-    var viewport = new Roadmap.Viewport({
+    var viewport = new Roadmaps.Viewport({
       start: new Date(<%=raw @range.begin.to_json %>),
       end: new Date(<%=raw @range.end.to_json %>)
     });
 
-    view = new Roadmap.ShowRoadmapView({
-      milestones: Roadmap.milestones,
+    view = new Roadmaps.RoadmapView({
+      milestones: Roadmaps.milestones,
       showToday: <%= @show_today %>,
       showThumbnail: false,
       showProgress: true,
