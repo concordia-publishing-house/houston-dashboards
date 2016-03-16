@@ -8,12 +8,12 @@ module Houston::Dashboards
     end
 
     def completed_checkboxes(pull_request)
-      pull_request.body.scan("[x]").count
+      pull_request.body.to_s.scan("[x]").count
     end
 
     def total_checkboxes(pull_request)
-      completed = pull_request.body.scan("[x]").count
-      not_completed = pull_request.body.scan("[ ]").count
+      completed = pull_request.body.to_s.scan("[x]").count
+      not_completed = pull_request.body.to_s.scan("[ ]").count
       completed + not_completed
     end
 
