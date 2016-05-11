@@ -2,7 +2,7 @@ class Houston::Dashboards::PullsController < ApplicationController
   layout "houston/dashboards/dashboard"
 
   def index
-    pulls = Github::PullRequest
+    pulls = Github::PullRequest.open
       .preload(:project, :user)
       .without_labels("archived", "experimental")
       .order(created_at: :asc)
