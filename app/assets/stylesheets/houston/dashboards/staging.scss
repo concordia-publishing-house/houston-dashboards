@@ -1,10 +1,3 @@
-@mixin checkboxes {
-  width: 100px;
-  padding-right: 10px;
-  text-align: right;
-  font-size: 1.33em;
-}
-
 #on-staging {
   table-layout: fixed;
   width: 100%;
@@ -28,7 +21,6 @@
       }
 
       &.staging-pr-title { width: 99%; }
-      &.checkboxes { @include checkboxes; }
       &.staging-user { width: 26px; }
 
       .pr-tag {
@@ -69,8 +61,38 @@
       }
 
       &.up-next-title { width: 99%; }
-      &.checkboxes { @include checkboxes; }
       &.up-next-user { width: 26px; }
     }
   }
+}
+
+#on-staging, #up-next {
+  .checkboxes {
+    width: 7em;
+    text-align: right;
+
+    .counter {
+      width: 3em;
+      margin: 0 0.25em;
+      text-align: right;
+      display: inline-block;
+      font-weight: 300;
+
+      &.zero { color: #444; }
+
+      &::after {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        margin-left: 0.33em;
+      }
+    }
+    .counter-unchecked::after { content: "\f096"; }
+    .counter-checked::after { content: "\f046"; }
+    .counter-checked { color: #3a8c2a; } // same hue as leaf
+    .counter-checked { color: #1e5f11; } // same hue as leaf
+  }
+
 }

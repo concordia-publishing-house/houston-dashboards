@@ -2,15 +2,15 @@ module Houston::Dashboards
   module StagingHelper
 
     def checkboxes(pull_request)
-      checked = completed_checkboxes(pull_request)
-      unchecked = unchecked_checkboxes(pull_request)
-      """
-      #{unchecked} <i class='fa fa-square-o' aria-hidden='true'></i>
-      #{checked} <i class='fa fa-check-square-o' aria-hidden='true'></i>
-      """.html_safe if checked || unchecked
+      counter(unchecked_checkboxes(pull_request), css: "counter-unchecked") +
+      counter(checked_checkboxes(pull_request), css: "counter-checked").html_safe
     end
 
-    def completed_checkboxes(pull_request)
+    def counter(count, css: "")
+      "<span class=\"counter #{css} #{"zero" if count.zero?}\">#{count}</span>".html_safe
+    end
+
+    def checked_checkboxes(pull_request)
       pull_request.body.to_s.scan("[x]").count
     end
 
