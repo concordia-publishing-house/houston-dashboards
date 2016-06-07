@@ -1,3 +1,10 @@
+@mixin checkboxes {
+  width: 100px;
+  padding-right: 10px;
+  text-align: right;
+  font-size: 1.33em;
+}
+
 #on-staging {
   table-layout: fixed;
   width: 100%;
@@ -20,17 +27,9 @@
         width: 75px;
       }
 
-      &.staging-pr-title{
-        width: 99%;
-      }
-
-      &.checkboxes {
-        width: 40px;
-        text-align: right;
-      }
-      &.staging-user {
-        width: 26px;
-      }
+      &.staging-pr-title { width: 99%; }
+      &.checkboxes { @include checkboxes; }
+      &.staging-user { width: 26px; }
 
       .pr-tag {
         display: inline-block;
@@ -40,12 +39,8 @@
         line-height: 1;
         margin-left: 8px;
 
-        &.test-pass {
-          background-color: #009800;
-        }
-        &.test-hold {
-          background-color: #e11d21;
-        }
+        &.test-pass { background-color: #009800; }
+        &.test-hold { background-color: #e11d21; }
       }
     }
   }
@@ -73,18 +68,9 @@
         width: 75px;
       }
 
-      &.up-next-title{
-        width: 99%;
-      }
-
-      &.checkboxes {
-        width: 40px;
-        text-align: right;
-      }
-
-      &.up-next-user {
-        width: 26px;
-      }
+      &.up-next-title { width: 99%; }
+      &.checkboxes { @include checkboxes; }
+      &.up-next-user { width: 26px; }
     }
   }
 }

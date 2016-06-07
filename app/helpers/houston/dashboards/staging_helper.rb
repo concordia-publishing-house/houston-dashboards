@@ -3,18 +3,19 @@ module Houston::Dashboards
 
     def checkboxes(pull_request)
       checked = completed_checkboxes(pull_request)
-      total = total_checkboxes(pull_request)
-      "<span class='label'>#{checked}/#{total}</span>".html_safe unless total < 1
+      unchecked = unchecked_checkboxes(pull_request)
+      """
+      #{unchecked} <i class='fa fa-square-o' aria-hidden='true'></i>
+      #{checked} <i class='fa fa-check-square-o' aria-hidden='true'></i>
+      """.html_safe if checked || unchecked
     end
 
     def completed_checkboxes(pull_request)
       pull_request.body.to_s.scan("[x]").count
     end
 
-    def total_checkboxes(pull_request)
-      completed = pull_request.body.to_s.scan("[x]").count
-      not_completed = pull_request.body.to_s.scan("[ ]").count
-      completed + not_completed
+    def unchecked_checkboxes(pull_request)
+      pull_request.body.to_s.scan("[ ]").count
     end
 
     def staging_status(pull_request)
